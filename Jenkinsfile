@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        DOCKER_IMAGE = 'yashjskj/private-registry:latest'
+        DOCKER_IMAGE = 'yashjskj/backend:latest'
     }
     stages {
         stage('Build Docker Image') {
@@ -23,8 +23,10 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 script {
-                    sh 'kubectl apply -f k8s/backend-deployment.yaml'
                     sh 'kubectl apply -f k8s/backend-service.yaml'
+                    sh 'kubectl apply -f k8s/backend-deployment.yaml'
+                    sh 'kubectl apply -f k8s/mongodb-service.yaml'
+                    sh 'kubectl apply -f k8s/mongodb-deployment.yaml'
                 }
             }
         }
