@@ -15,7 +15,11 @@ spec:
     spec:
       containers:
         - name: backend
-          image: yashjskj/frontend:latest
+          image: yashjskj/backend:latest
           ports:
             - containerPort: 3000
-
+          env:
+            - name: MONGO_URI
+              value: mongodb://root:example@mongodb:27017/
+            - name: PORT
+              value: "3000"
