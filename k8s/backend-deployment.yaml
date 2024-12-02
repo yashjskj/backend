@@ -17,9 +17,9 @@ spec:
         - name: backend
           image: yashjskj/backend:latest
           ports:
-            - containerPort: 3000
+            - containerPort: 5050
           env:
             - name: PORT
-              value: "3000"
+              value: "5050"
             - name: MONGO_URI
               value: mongodb://admin:adminpassword@192.168.49.2:30017/admin
