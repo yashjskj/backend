@@ -24,10 +24,11 @@ pipeline {
             steps {
                 script {
                     sh 'kubectl apply -f k8s/secret.yaml'
-                    sh 'kubectl apply -f k8s/backend-service.yaml'
-                    sh 'kubectl apply -f k8s/backend-deployment.yaml'
                     sh 'kubectl apply -f k8s/mongodb-service.yaml'
                     sh 'kubectl apply -f k8s/mongodb-deployment.yaml'
+                    sh 'kubectl apply -f k8s/backend-service.yaml'
+                    sh 'kubectl apply -f k8s/backend-deployment.yaml'
+                    
                 }
             }
         }
