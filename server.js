@@ -17,13 +17,26 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Add /create route directly in server.js
-app.post('/create', (req, res) => {
-    // You can handle the logic for creating a record here or simply pass it to the /record route
+// Add /create route directly in server.js to forward requests to /record route
+app.post('/create', async (req, res) => {
     console.log("POST /create - Creating a new record", req.body);
     
-    // You can send a response here or call a function to handle the logic
-    res.send('Create Route');
+    // Forward the request to the /record POST route
+    try {
+        // Simulate the behavior of the /record route
+        const newDocument = {
+            name: req.body.name,
+            position: req.body.position,
+            level: req.body.level,
+        };
+
+        let collection = await db.collection("records");
+        let result = await collection.insertOne(newDocument);
+        res.status(201).send({ message: 'Record created successfully', result: result });
+    } catch (err) {
+        console.error("Error creating record:", err);
+        res.status(500).send("Error creating record");
+    }
 });
 
 // Use /record route for other record-related actions
