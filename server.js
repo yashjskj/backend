@@ -30,6 +30,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Add GET handler for /create to display a message in the browser
+app.get("/create", (req, res) => {
+  res.status(405).send("This route is for POST requests only.");
+});
+
 // Add /create route directly in server.js to forward requests to /record route
 app.post('/create', async (req, res) => {
     console.log("POST /create - Creating a new record", req.body);
