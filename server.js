@@ -30,6 +30,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.get("/create", (req, res) => {
+  res.send("<h1>POST Endpoint for Creating Records</h1><p>Use POST to this endpoint with valid data to create a new record.</p>");
+});
+
+
 // Add /create route directly in server.js to forward requests to /record route
 app.post('/create', async (req, res) => {
     console.log("POST /create - Creating a new record", req.body);
