@@ -33,8 +33,8 @@ pipeline {
                     sh 'kubectl rollout restart deployment/mongodb -n multi-service-app'
                     sh 'kubectl rollout restart deployment/backend -n multi-service-app'
 
-                    // Adding sleep for 50 seconds to ensure MongoDB stabilizes
-                    echo 'Waiting for 50 seconds to ensure MongoDB stabilizes...'
+                    // Adding sleep for 50 seconds
+                    echo 'Waiting for 50 seconds to ensure service are running...'
                     sleep 50
                     
                     // Verify if MongoDB deployment is successful
