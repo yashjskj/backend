@@ -32,9 +32,9 @@ spec:
             - name: MONGO_INITDB_DATABASE
               value: employees
           volumeMounts:
-            - name: mongodb-storage
+            - name: mongodb-pvc
               mountPath: /custom-data/db # Mount point inside the container
       volumes:
-        - name: mongodb-data
+        - name: mongodb-pvc
           persistentVolumeClaim:
             claimName: mongodb-pvc  # Use the new PVC name
