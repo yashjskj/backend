@@ -28,7 +28,7 @@ pipeline {
                     sh 'kubectl apply -f k8s/mongodb-deployment.yaml'
                     // Adding sleep for 20 seconds to ensure MongoDB stabilizes
                     echo 'Waiting for 20 seconds to ensure MongoDB stabilizes...'
-                    sleep 20
+                    sleep 50
                     sh 'kubectl apply -f k8s/backend-service.yaml'
                     sh 'kubectl apply -f k8s/backend-deployment.yaml'
                     
