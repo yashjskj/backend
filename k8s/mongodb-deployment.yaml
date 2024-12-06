@@ -31,10 +31,3 @@ spec:
                   key: mongo-root-password
             - name: MONGO_INITDB_DATABASE
               value: employees
-          volumeMounts:
-            - name: mongodb-pvc
-              mountPath: /mnt/data/mongodb # Mount the persistent volume at this location inside the container
-      volumes:
-        - name: mongodb-pvc
-          persistentVolumeClaim:
-            claimName: mongodb-pvc # Ensure this matches the name of your PVC
