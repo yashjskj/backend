@@ -1,3 +1,19 @@
+# PersistentVolumeClaim for MongoDB
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongodb-pvc
+  namespace: multi-service-app
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi # Size of the persistent volume
+
+---
+
+# MongoDB Deployment with Persistent Storage
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -31,3 +47,10 @@ spec:
                   key: mongo-root-password
             - name: MONGO_INITDB_DATABASE
               value: employees
+          volumeMounts:
+            - name: mongodb-storage
+              mountPath: /custom-data/db # Mount point inside the container
+      volumes:
+        - name: mongodb-storage
+          persistentVolumeClaim:
+            claimName: mongodb-pvc
