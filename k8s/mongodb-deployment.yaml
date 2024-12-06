@@ -33,8 +33,8 @@ spec:
               value: employees
           volumeMounts:
             - name: mongodb-pvc
-              mountPath: /custom-data/db # Mount point inside the container
+              mountPath: /custom-data/db # Mount the persistent volume at this location inside the container
       volumes:
         - name: mongodb-pvc
           persistentVolumeClaim:
-            claimName: mongodb-pvc  # Use the new PVC name
+            claimName: mongodb-pvc # Ensure this matches the name of your PVC
