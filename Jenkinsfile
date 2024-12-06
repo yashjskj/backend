@@ -28,6 +28,9 @@ pipeline {
                     sh 'kubectl apply -f k8s/mongodb-deployment.yaml'
                     sh 'kubectl apply -f k8s/backend-service.yaml'
                     sh 'kubectl apply -f k8s/backend-deployment.yaml'
+                    sh 'kubectl rollout restart deployment/mongodb -n multi-service-app'
+                    sh 'kubectl rollout restart deployment/backend -n multi-service-app'
+                    
                     
                 }
             }
