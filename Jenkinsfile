@@ -38,7 +38,7 @@ pipeline {
                     sleep 50
                     
                     // Verify if MongoDB deployment is successful
-                    def mongodbPodStatus = sh(script: 'kubectl get pods -n multi-service-app -l app=mongodb -o jsonpath="{.items[0].status.phase}"', returnStdout: true).trim()
+                    def mongodbPodStatus = sh(script: 'kubectl get pods -n mongodb -l app=mongodb -o jsonpath="{.items[0].status.phase}"', returnStdout: true).trim()
                     if (mongodbPodStatus != 'Running') {
                         echo "MongoDB pod is not running, initiating rollback..."
                         // Rollback MongoDB deployment if it's not running
@@ -47,7 +47,7 @@ pipeline {
                     }
 
                     // Verify if Backend deployment is successful
-                    def backendPodStatus = sh(script: 'kubectl get pods -n multi-service-app -l app=backend -o jsonpath="{.items[0].status.phase}"', returnStdout: true).trim()
+                    def backendPodStatus = sh(script: 'kubectl get pods -n backend -l app=backend -o jsonpath="{.items[0].status.phase}"', returnStdout: true).trim()
                     if (backendPodStatus != 'Running') {
                         echo "Backend pod is not running, initiating rollback..."
                         // Rollback Backend deployment if it's not running
