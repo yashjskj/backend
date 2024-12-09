@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: backend
-  namespace: multi-service-app
+  namespace: backend
 spec:
   replicas: 1
   selector:
@@ -22,4 +22,4 @@ spec:
             - name: PORT
               value: "5050"
             - name: MONGO_URI
-              value: mongodb://admin:adminpassword@192.168.49.2:30017/
+              value: mongodb://admin:adminpassword@mongodb.mongodb.svc.cluster.local:27017/
