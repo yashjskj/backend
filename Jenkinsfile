@@ -30,8 +30,8 @@ pipeline {
                     sh 'kubectl apply -f k8s/backend-deployment.yaml'
                     
                     // Rollout restarts to ensure changes are applied
-                    sh 'kubectl rollout restart deployment/mongodb -n multi-service-app'
-                    sh 'kubectl rollout restart deployment/backend -n multi-service-app'
+                    sh 'kubectl rollout restart deployment/mongodb -n mongodb'
+                    sh 'kubectl rollout restart deployment/backend -n backend'
 
                     // Adding sleep for 50 seconds
                     echo 'Waiting for 50 seconds to ensure service are running...'
@@ -42,7 +42,7 @@ pipeline {
                     if (mongodbPodStatus != 'Running') {
                         echo "MongoDB pod is not running, initiating rollback..."
                         // Rollback MongoDB deployment if it's not running
-                        sh 'kubectl rollout undo deployment/mongodb -n multi-service-app'
+                        sh 'kubectl rollout undo deployment/mongodb -n mongodb'
                         currentBuild.result = 'FAILURE' // Mark the build as failed
                     }
 
@@ -51,7 +51,7 @@ pipeline {
                     if (backendPodStatus != 'Running') {
                         echo "Backend pod is not running, initiating rollback..."
                         // Rollback Backend deployment if it's not running
-                        sh 'kubectl rollout undo deployment/backend -n multi-service-app'
+                        sh 'kubectl rollout undo deployment/backend -n backend'
                         currentBuild.result = 'FAILURE' // Mark the build as failed
                     }
                 }
