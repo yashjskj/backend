@@ -22,4 +22,4 @@ spec:
             - name: PORT
               value: "5050"
             - name: MONGO_URI
-              value: mongodb://admin:adminpassword@mongodb.mongodb.svc.cluster.local:30017/
+              value: mongodb://admin:adminpassword@mongodb.mongodb.svc.cluster.local:27017/
